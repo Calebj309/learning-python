@@ -1,4 +1,4 @@
-This is an app I made that provides a 7 day forecast for a given location in the United States
+This is a program I made that provides a 7 day forecast for a given location in the United States
 
 It uses 2 APIs:
 1. "https://nominatim.openstreetmap.org/" provides coordinate data for an entered location.
