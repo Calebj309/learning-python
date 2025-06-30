@@ -24,7 +24,7 @@ def get_forecast(user_input):
     
     #Making sure the location is in the US, getting new location if now
     while location_response.status_code != 200 or len(location_data) == 0 or location_data[0]['address']['country_code'] != 'us':
-        location_response = get_location_params(input('Invalid entry! Please enter a location in the United States: '))
+        location_response = get_location_params(input('Invalid entry! Please enter a location: '))
         location_data = location_response.json()
         
     #Storing lat, lon, city and state data
@@ -94,8 +94,6 @@ def get_forecast(user_input):
 
 introtext = "Welcome to Caleb's Weather Service!"
 print(f'{introtext:=^80}\n')
-
-user_input = 'hi :D'
 
 while True:
     user_input = input('Enter a location in the United States to receive a weather forecast: ')
