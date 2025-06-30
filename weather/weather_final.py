@@ -11,10 +11,12 @@ headers = {
 
 def get_input():
     invalid = True
-    user_input = input('Enter a location in the United States to receive a weather forecast, or type "quit" to quit: ')
+    user_input = input()
     while invalid == True:
         if has_numbers(user_input) or user_input == 'us':
             user_input = input("Invalid entry! Please enter a valid location: ")
+        elif user_input == {'quit', 'q', 'end', 'close', 'stop'}:
+            quit_check(user_input)
         else:
             invalid = False
     return user_input
@@ -39,13 +41,17 @@ def request_location(user_input):
 
     return location_response
 
+
 def get_weather_data(user_input):
 
     location_response = request_location(user_input)
     location_data = location_response.json()
 
     while location_response.status_code != 200 or len(location_data) == 0 or location_data[0]['address']['country_code'] != 'us':
-        location_response = request_location(input('Invalid entry! Please enter a location: '))
+        print("Invalid entry! Please enter a valid location: ", end='')
+        user_input = get_input()
+        quit_check(user_input)
+        location_response = request_location(user_input)
         location_data = location_response.json()
 
     lat = location_data[0]['lat']
@@ -113,14 +119,21 @@ def master_data_print(weather):
 
     print_header(WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH)
     print_weather(weather, WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH)
-    
+
+    print('Enter another location, or type "quit" to quit: ', end='')
+
+
+def quit_check(user_input):
+    if user_input.lower() in {'quit', 'q', 'end', 'close', 'stop'}:
+        exit()    
+
 
 introtext = "Welcome to Caleb's Weather Service!"
 print(f'{introtext:=^{GRAPH_WIDTH}}\n')
+print('Enter a location in the United States to receive a weather forecast, or type "quit" to quit: ')
 
 while True:
     user_input = get_input()
-    if user_input.lower() in {'quit', 'q', 'end', 'close', 'stop'}:
-        break
+    quit_check(user_input)
     weather = get_weather_data(user_input)
     master_data_print(weather)
