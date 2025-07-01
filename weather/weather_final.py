@@ -29,7 +29,7 @@ def has_numbers(user_input):
         return False
     
 
-def request_location(user_input):
+def get_location(user_input):
     location_params = {
         'q': user_input,
         'format': 'json',
@@ -44,14 +44,14 @@ def request_location(user_input):
 
 def get_weather_data(user_input):
 
-    location_response = request_location(user_input)
+    location_response = get_location(user_input)
     location_data = location_response.json()
 
     while location_response.status_code != 200 or len(location_data) == 0 or location_data[0]['address']['country_code'] != 'us':
         print("Invalid entry! Please enter a valid location: ", end='')
         user_input = get_input()
         quit_check(user_input)
-        location_response = request_location(user_input)
+        location_response = get_location(user_input)
         location_data = location_response.json()
 
     lat = location_data[0]['lat']
@@ -125,6 +125,7 @@ def master_data_print(weather):
 
 def quit_check(user_input):
     if user_input.lower() in {'quit', 'q', 'end', 'close', 'stop'}:
+        print('Exiting...')
         exit()    
 
 
