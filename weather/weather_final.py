@@ -5,6 +5,7 @@ TEMP_WIDTH = 15
 PRECIP_WIDTH = 20
 WIND_WIDTH = 23
 GRAPH_WIDTH = 83
+
 headers = {
     "User-agent": "weather app"
 }
@@ -43,7 +44,6 @@ def get_location(user_input):
 
 
 def get_weather_data(user_input):
-
     location_response = get_location(user_input)
     location_data = location_response.json()
 
@@ -82,7 +82,6 @@ def get_weather_data(user_input):
     
 
 def print_header(WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH):
-
     print(f'|{'WHEN'.center(WHEN_WIDTH)}|{'TEMP'.center(TEMP_WIDTH)}|{'PRECIPITATION'.center(PRECIP_WIDTH)}|{'WIND'.center(WIND_WIDTH)}|')
 
     strlen = len(f'|{'WHEN'.center(WHEN_WIDTH)}|{'TEMP'.center(TEMP_WIDTH)}|{'PRECIPITATION'.center(PRECIP_WIDTH)}|{'WIND'.center(WIND_WIDTH)}|')
@@ -116,7 +115,6 @@ def print_weather(weather, WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH):
 
 
 def master_data_print(weather):
-
     print_header(WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH)
     print_weather(weather, WHEN_WIDTH, TEMP_WIDTH, PRECIP_WIDTH, WIND_WIDTH)
 
